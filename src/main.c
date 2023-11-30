@@ -8,15 +8,15 @@ int main() {
     printf("Text: ");
     scanf("%s", input);
 
-    int freq[256] = {0};
+    int frequencyTable[256] = {0};
 
     int len = strlen(input);
     for (int i = 0; i < len; ++i)
-        ++freq[input[i]];
+        ++frequencyTable[input[i]];
 
     int size = 0;
     for (int i = 0; i < 256; ++i) {
-        if (freq[i] > 0)
+        if (frequencyTable[i] > 0)
             size++;
     }
 
@@ -25,9 +25,9 @@ int main() {
     int j = 0;
 
     for (int i = 0; i < 256; ++i) {
-        if (freq[i] > 0) {
+        if (frequencyTable[i] > 0) {
             data[j] = i;
-            frequency[j] = freq[i];
+            frequency[j] = frequencyTable[i];
             j++;
         }
     }
