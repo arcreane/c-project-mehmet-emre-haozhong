@@ -3,37 +3,36 @@
 #include <string.h>
 #include "huffman.c"
 
-#define MAX_SIZE 100
+int main() {
+    char input[MAX_TREE_HT];
+    printf("Text: ");
+    scanf("%s", input);
 
-int main()
-{
-    char arr[MAX_SIZE][MAX_SIZE];
-    int freq[MAX_SIZE];
+    int freq[256] = {0};
 
-    int i = 0;
-    while (i < MAX_SIZE)
-    {
-        printf("%d:", i+1);
-        printf("Data was built SUCCESSFULLY! \nPlease enter text to represent a data: ");
-        scanf("%s", arr[i]);
-        printf("Please enter number to input a data: ");
-        scanf("%d", &freq[i]);
-        printf("\n");
+    int len = strlen(input);
+    for (int i = 0; i < len; ++i)
+        ++freq[input[i]];
 
-        char scanner;
-        int check;
-        printf("If you want to build another data, then continue (Y/n): ");
-        scanf(" %c", &scanner);
-
-        if (scanner != 'Y' && scanner != 'y'){
-            break;
-        }
-        i++;
-        printf("--------------------------------------------------------\n");
+    int size = 0;
+    for (int i = 0; i < 256; ++i) {
+        if (freq[i] > 0)
+            size++;
     }
 
-    int size = i + 1;
+    char data[size];
+    int frequency[size];
+    int j = 0;
 
-    HuffmanCodes((char **)arr, freq, size);
+    for (int i = 0; i < 256; ++i) {
+        if (freq[i] > 0) {
+            data[j] = i;
+            frequency[j] = freq[i];
+            j++;
+        }
+    }
+
+    HuffmanCodes(data, frequency, size);
+
     return 0;
 }
